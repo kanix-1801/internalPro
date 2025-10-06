@@ -1,0 +1,24 @@
+<apex:page controller="AccountPicklistController">
+    <apex:form >
+  
+        <apex:pageBlock title="Account Selection">
+            
+            <apex:pageBlockSection >
+                <apex:selectList id="accPicklist" value="{!selectedAccountId}" size="1">
+    			<apex:selectOptions value="{!accountOptions}"/>
+				</apex:selectList>
+			<apex:message for="accPicklist" style="color:red; font-weight:bold;"/>
+
+
+                <apex:commandButton value="Done" action="{!showSelectedAccount}" rerender="result, msgs"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection id="result">
+                <apex:outputText value="Selected Account: {!selectedAccountName}"/>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+        
+        <apex:pageMessages id="msgs"/>
+    </apex:form>
+</apex:page>

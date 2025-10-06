@@ -1,0 +1,57 @@
+<template>
+    <img src="https://orgfarm-c1fda65bb8-dev-ed.develop.my.site.com/sfc/servlet.shepherd/version/download/068fj000002scaDAAQ"/>
+    <!-- <img src="https://orgfarm-c1fda65bb8-dev-ed.develop.file.force.com/sfc/servlet.shepherd/version/download/068fj000002scaDAAQ"/> -->
+    <img src="https://orgfarm-c1fda65bb8-dev-ed.develop.lightning.force.com/sfc/servlet.shepherd/version/download/068fj000002visnAAA"/>
+    <!-- <img src="https://orgfarm-c1fda65bb8-dev-ed.develop.live-preview.salesforce-experience.com/sfc/servlet.shepherd/version/download/068fj000002scaDAAQ"/> -->
+    <template if:false={showThirdLayer}>
+        <lightning-card title="Category & SubCategory Search" icon-name="standard:account">
+            <div class="main-catalogue-content">
+                <div class="filters-row">
+                    <lightning-button label="Clear" variant="brand" onclick={handleClear} class="button-style">
+                    </lightning-button>
+
+                    <lightning-combobox placeholder="Select Category" value={selectedCategoryId}
+                        options={categoryOptions} onchange={handleCategoryChange} class="small-field">
+                    </lightning-combobox>
+
+                    <lightning-combobox placeholder="Select Sub Category" value={selectedSubCategoryId}
+                        options={subCategoryOptions} onchange={handleSubCategoryChange} class="small-field">
+                    </lightning-combobox>
+
+                    <lightning-input type="text" placeholder="Search" value={searchName} onchange={handleSearchChange}
+                        class="small-field">
+                    </lightning-input>
+
+                    <lightning-input type="text" placeholder="Search Sub Category" value={searchSubCategoryName}
+                        onchange={handleSearchChange} class="small-field">
+                    </lightning-input>
+                </div>
+                <div class="slds-m-vertical_medium"></div>
+                <template if:true={results}>
+                    <div class="images-grid">
+                        <template for:each={results} for:item="rec">
+                            <div key={rec.id} class="card-img-container">
+                                <template for:each={rec.imageUrls} for:item="url">
+                                    <img key={url} src={url} alt={rec.name} class="catalogue-img " data-id={rec.id}
+                                        data-name={rec.name} onclick={handleImageClick} />
+                                </template>
+                                <p class="slds-text-body_small slds-m-top_x-small">{rec.name}</p>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="slds-grid slds-grid_align-spread slds-m-top_medium">
+                        <lightning-button label="Previous" onclick={handlePrev} disabled={isFirstPage}>
+                        </lightning-button>
+                        <span>Page {currentPage} of {totalPages}</span>
+                        <lightning-button label="Next" onclick={handleNext} disabled={isLastPage}>
+                        </lightning-button>
+                    </div>
+                </template>
+            </div>
+        </lightning-card>
+    </template>
+    <template if:true={showThirdLayer}>
+        <c-image-catalogue-new-third-layer
+            selected-sub-category-id={selectedSubCategoryId}></c-image-catalogue-new-third-layer>
+    </template>
+</template>

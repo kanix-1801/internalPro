@@ -1,0 +1,309 @@
+/* ---------- GALLERY LAYOUT ---------- */
+
+.slds-icon{
+ fill : blue !important;
+}
+.icon_color{
+ fill : blue !important;
+ --slds-c-icon-color-foreground-default: #ff713c;
+  --sds-c-icon-color-foreground: blue;
+    --sds-c-icon-color-background: #9e9e9e54;
+}
+.slds-icon-text-default {
+    --slds-c-icon-color-foreground: #951313;
+    
+}
+
+.gallery-row {
+    display: flex;
+    gap: 1rem;
+    align-items: stretch;
+    padding: 0.25rem;
+    height: 450px;
+}
+
+/* left preview column (25%) */
+.preview-col {
+    flex: 0 0 25%;
+    display: flex;
+    align-items: stretch;
+}
+
+/* ensures two previews stack and share height equally */
+.preview-images-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* preview images will split the available column height (50/50) */
+.preview-img {
+    flex: 1 1 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 5px;
+    box-shadow: 0 6px 18px #181818d6;
+    border: 1px solid #dad1d194;
+}
+
+/* main column (75%) */
+.main-col {
+    flex: 1 1 0;
+    display: flex;
+    align-items: stretch;
+}
+
+/* ---------- FRAME & IMAGE (no gap between image & border) ---------- */
+.main-frame {
+    position: relative;
+    width: 100%;
+    height: 99%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 3px solid #e5e5e5;
+    box-shadow: 0 6px 18px rgb(116, 116, 116);
+    border-radius: 6px;
+    background: #000;
+    box-sizing: border-box;
+    margin: 1px 10px 9px;
+}
+
+/* image fills frame completely with no spacing */
+.main-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+/* ---------- NAV ARROWS ---------- */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+box-shadow: inset 3px 5px 8px 1px rgba(0, 0, 0, 0.5);    z-index: 20;
+}
+
+/* arrows flush with image border */
+.left-arrow {
+    left: 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.right-arrow {
+    right: 0;
+    border-radius: 4px 0 0 4px;
+}
+
+.nav-arrow:hover:not(:disabled) {
+    transform: translateY(-50%) scale(1.05);
+    background: rgba(255, 255, 255, 1);
+}
+
+.nav-arrow:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* ---------- CONTROL BAR (left aligned, bare white icons) ---------- */
+.control-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    color: white;
+}
+
+.control-left {
+    display: flex;
+    gap: 10px;
+}
+
+.control-icon{
+    --slds-c-icon-color-foreground-default: white !important;
+}
+
+.control-right {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* lightning-button-icon variant="bare" + variable for icon color */
+.control-bar lightning-button-icon {
+    --slds-c-icon-color-foreground-default: #fff;
+    --slds-c-button-neutral-color-background: transparent;
+    --slds-c-button-neutral-color-border: transparent;
+}
+
+
+/* ---------- MODAL (Full screen view) ---------- */
+.custom-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.custom-modal-container {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}
+
+.custom-modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Expanded image takes 80% of screen size */
+.expanded-image {
+    max-width: 100vw;
+    max-height: 100vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    background: transparent;
+
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 9999;
+    transition: background 0.2s ease;
+}
+
+.close-btn lightning-icon {
+    --slds-c-icon-color-foreground-default: #fff;
+}
+
+
+/* ---------- HORIZONTAL THUMBNAIL STRIP (centered) ---------- */
+.thumbnail-strip {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 12px;
+    padding: 8px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.thumbnail-strip::-webkit-scrollbar {
+    height: 8px;
+}
+
+.thumbnail-strip::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.thumbnail-strip::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.thumbnail-strip img {
+    height: 200px;
+    width: 250px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid #0000001f ;
+    transition: transform 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+}
+
+.thumbnail-strip img:hover {
+    transform: scale(1.05);
+    border-color: #666;
+}
+
+.thumbnail-strip img.active {
+    border-color: #0070d2;
+}
+
+
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+    .gallery-row {
+        gap: 0.6rem;
+    }
+
+    .nav-arrow {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 640px) {
+
+    .gallery-row {
+        flex-direction: column;
+    }
+
+    .preview-col {
+        order: 2;
+        flex-direction: row;
+    }
+
+    .preview-images-column {
+        flex-direction: row;
+        gap: 8px;
+        height: auto;
+    }
+
+    .preview-img {
+        flex: 1 1 0;
+        height: 80px;
+    }
+}
